@@ -32,6 +32,24 @@ def create_database():
     connection.commit()
     connection.close()
 
+def add_task(title, category, due_date, status):
+    connection = sqlite3.connect(DATABASE)
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        INSERT INTO tasks (title, category, due_date, status)
+        VALUES (?, ?, ?, ?)
+    """, (title, category, due_date, status))
+
+    connection.commit()
+    connection.close()
 
 if __name__ == "__main__":
     create_database()
+    add_task(
+        "CS 3338 GitHub Project",
+        "School",
+        "2026-10-10",
+        "In Progress"
+    )

@@ -45,11 +45,28 @@ def add_task(title, category, due_date, status):
     connection.commit()
     connection.close()
 
+
+def get_tasks():
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM tasks")
+    tasks = cursor.fetchall()
+
+    connection.close()
+    return tasks
+
+
 if __name__ == "__main__":
-    create_database()
-    add_task(
-        "CS 3338 GitHub Project",
-        "School",
-        "2026-10-10",
-        "In Progress"
-    )
+    # create_database()
+    # add_task(
+    #     "CS 3338 GitHub Project",
+    #     "School",
+    #     "2026-10-10",
+    #     "In Progress"
+    # )
+
+    tasks = get_tasks()
+
+    for task in tasks:
+        print(task)
